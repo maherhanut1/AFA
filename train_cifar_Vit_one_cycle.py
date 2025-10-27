@@ -116,6 +116,7 @@ def train_PFA_cifar10_gen(class_type: RafViTV2, session_name, ranks=[10], max_lr
                     emb_dropout=0.1,
                     rank=10,
                 )
+            
             # model = torch.compile(model)
             # model = FC_rAFA()
                 
@@ -136,7 +137,7 @@ def train_PFA_cifar10_gen(class_type: RafViTV2, session_name, ranks=[10], max_lr
             # Create separate optimizers
             optimizer = optim.Adamax(other_params, lr=max_lr, weight_decay=decay)
             # p_optimizer = optim.Adamax(p_params, lr=1e-5, weight_decay=1e-5)
-            p_optimizer = optim.RMSprop(p_params, lr=1e-4, weight_decay=1e-8, momentum=0.9)
+            p_optimizer = optim.Adamax(p_params, lr=1e-5, weight_decay=0)
             
             # Log parameter counts for debugging
             total_p_params = sum(p.numel() for p in p_params)
